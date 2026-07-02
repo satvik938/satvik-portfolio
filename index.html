@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Satvik — AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0e15;
+      --surface: #131826;
+      --surface-hi: #1a2032;
+      --border: #262e42;
+      --text-primary: #eef0f6;
+      --text-secondary: #97a1bd;
+      --text-muted: #5b6480;
+      --accent: #e2984f;
+      --accent-light: rgba(226, 152, 79, 0.12);
+      --accent-mid: #c67c38;
+      --teal: #5fd3c4;
+      --teal-light: rgba(95, 211, 196, 0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.055) 1px, transparent 0);
+      background-size: 26px 26px;
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 14, 21, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+    h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 .highlight {
+      background: linear-gradient(100deg, var(--accent) 10%, var(--teal) 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-bio {
+      font-size: 1.075rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0b0e15;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: #eeab6c; transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 11px 22px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    /* DIVIDER */
+    .divider {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* SECTION */
+    section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover { border-color: var(--teal); transform: translateY(-2px); box-shadow: 0 0 0 1px var(--teal-light); }
+
+    .skill-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .skill-tags {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--accent-light);
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .project-tag.teal {
+      background: var(--teal-light);
+      color: var(--teal);
+    }
+
+    .project-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .stack-pill {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-secondary);
+    }
+
+    .project-arrow {
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: color 0.2s;
+    }
+
+    .project-card:hover .project-arrow { color: var(--accent); }
+
+    /* EXPERIENCE */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-item:last-child { border-bottom: none; }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding-top: 3px;
+    }
+
+    .timeline-role {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-org {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* EDUCATION */
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .edu-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .edu-degree {
+      font-family: 'Sora', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-school {
+      font-size: 0.875rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+
+    .edu-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1.25rem; }
+      section { padding: 3rem 1.25rem; }
+      .hero { padding: 5rem 1.25rem 3.5rem; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .timeline-date { padding-top: 0; }
+      .project-card { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Satvik</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" id="about">
+    <div class="hero-eyebrow">
+      <span></span>
+      Available for opportunities
+    </div>
+    <h1>Hi, I'm Satvik —<br><span class="highlight">AI Engineer</span></h1>
+    <p class="hero-bio">
+      I design and ship production LLM applications, RAG pipelines, and multi-agent systems. My focus is on Agentic AI, the Model Context Protocol (MCP), and cloud-native AI development — turning LLMs into reliable, business-ready solutions.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View projects →</a>
+      <a href="mailto:satvikaitharaju@gmail.com" class="btn-secondary">Email me</a>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- SKILLS -->
+  <section>
+    <p class="section-label">Expertise</p>
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🧠</div>
+        <div class="skill-name">Generative AI & LLMs</div>
+        <div class="skill-tags">Prompt Engineering, RAG, LLM Fine-tuning, AI Agents, MCP</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-name">ML & Frameworks</div>
+        <div class="skill-tags">FastAPI, LangChain, LangGraph, LlamaIndex, PyTorch, TensorFlow, Hugging Face</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔗</div>
+        <div class="skill-name">RAG & Agents</div>
+        <div class="skill-tags">Multi-Agent Systems, Agent Orchestration, Function/Tool Calling</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-name">Cloud & Data Engineering</div>
+        <div class="skill-tags">AWS (S3, Lambda, Bedrock), Azure, Spark, PySpark, Databricks, Kafka, Airflow, Snowflake</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">Vector Databases</div>
+        <div class="skill-tags">FAISS, ChromaDB, Pinecone, Weaviate</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-name">MLOps & DevOps</div>
+        <div class="skill-tags">Docker, Kubernetes, MLflow, Git, GitHub Actions, CI/CD</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Work</p>
+    <h2>Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div>
+          <span class="project-tag">Agentic AI · MCP</span>
+          <div class="project-title">Agentic AI Health Assistant using MCP and LLMs</div>
+          <p class="project-desc">An AI-powered healthcare assistant using AI agents, prompt engineering, and dynamic tool calling to deliver context-aware health guidance and symptom analysis. Designed RAG workflows with multi-agent orchestration, MCP servers, and external APIs, with unit testing and validation checks for production readiness.</p>
+          <div class="project-stack">
+            <span class="stack-pill">FastAPI</span>
+            <span class="stack-pill">LangChain</span>
+            <span class="stack-pill">LangGraph</span>
+            <span class="stack-pill">OpenAI</span>
+            <span class="stack-pill">MCP</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <span class="project-tag teal">LLM · RAG</span>
+          <div class="project-title">AI-Powered Document Intelligence System</div>
+          <p class="project-desc">An intelligent document processing and RAG platform that ingested technical manuals, engineering documents, and knowledge base articles, enabling semantic search and context-aware answering. Built scalable data ingestion, embedding, and vector indexing pipelines for low-latency insights.</p>
+          <div class="project-stack">
+            <span class="stack-pill">Python</span>
+            <span class="stack-pill">FastAPI</span>
+            <span class="stack-pill">LangChain</span>
+            <span class="stack-pill">FAISS</span>
+            <span class="stack-pill">Azure</span>
+            <span class="stack-pill">Databricks</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">Background</p>
+    <h2>Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">May 2023 — Apr 2024</div>
+        <div>
+          <div class="timeline-role">AI Data Engineer</div>
+          <div class="timeline-org">Dell Technologies</div>
+          <div class="timeline-desc">
+            Designed and deployed scalable ETL pipelines using Python, PySpark, Spark, Databricks, AWS S3, and Lambda, reducing pipeline execution time by 35%. Built an AI-powered Document Intelligence System using semantic search and RAG, cutting information retrieval time by 40%. Fine-tuned GPT, BERT, and T5 models with Hugging Face and TensorFlow, improving AI response accuracy by 30%. Integrated data pipelines with MLOps workflows using MLflow, Docker, Kubernetes, and CI/CD for automated model training, deployment, and monitoring.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- EDUCATION -->
+  <section>
+    <p class="section-label">Education</p>
+    <h2>Academic background</h2>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Master of Science in Information Systems and Technology</div>
+        <div class="edu-school">University of North Texas</div>
+        <div class="edu-meta">GPA: 3.7 / 4.0 · Aug 2024 – May 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Get in touch</p>
+    <h2>Let's connect</h2>
+    <div class="contact-grid">
+      <a href="mailto:satvikaitharaju@gmail.com" class="contact-link">
+        <div class="contact-icon">✉️</div>
+        Email
+      </a>
+      <a href="tel:+15134001583" class="contact-link">
+        <div class="contact-icon">📞</div>
+        +1 513-400-1583
+      </a>
+      <a href="/resume.pdf" class="contact-link">
+        <div class="contact-icon">📄</div>
+        Resume
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    Built by Satvik · AI Engineer
+  </footer>
+
+</body>
+</html>
